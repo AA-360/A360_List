@@ -1,0 +1,82 @@
+{
+    "name": "List_Uts",
+    "label": "List_Uts",
+    "description": "",
+    "group": "com.automationanywhere",
+    "artifactName": "List_Uts",
+    "packageVersion": "1.0-20210708-164348",
+    "codeVersion": "1.0-20210708-164348",
+    "author": "",
+    "commands": [
+        
+    ],
+    "conditionals": [
+        {
+            "name": "TextInList",
+            "label": "TextInList",
+            "description": "Verifica se um texto existe ou nao dentro de uma lista",
+            "nodeLabel": "TextInList: Check for {{value}} in {{lista}} - Condition ->{{select}}",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.conditionals.text_in_listCondition",
+            "attributes": [
+                {
+                    "name": "value",
+                    "label": "Valor",
+                    "type": "TEXT",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        },
+                        {
+                            "name": "VARIABLE_TYPE",
+                            "value": "STRING"
+                        }
+                    ]
+                },
+                {
+                    "name": "select",
+                    "label": "Operador",
+                    "description": "Procura um  valor dentro da lista com a condi\u00e7\u00e3o correspondente",
+                    "type": "SELECT",
+                    "defaultValue": {
+                        "string": "equals",
+                        "type": "STRING"
+                    },
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ],
+                    "options": [
+                        {
+                            "label": "Igual (=)",
+                            "value": "equals"
+                        },
+                        {
+                            "label": "Diferente (\u2260)",
+                            "value": "different"
+                        },
+                        {
+                            "label": "Inclui",
+                            "value": "in"
+                        },
+                        {
+                            "label": "N\u00e3o Inclui",
+                            "value": "not in"
+                        }
+                    ]
+                },
+                {
+                    "name": "lista",
+                    "label": "List String",
+                    "description": "Lista de string a ser consultada",
+                    "type": "LIST",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
