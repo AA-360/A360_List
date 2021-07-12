@@ -10,9 +10,9 @@ import java.lang.ClassCastException;
 import java.lang.Object;
 import java.lang.String;
 import java.lang.Throwable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
@@ -71,8 +71,8 @@ public final class text_in_listCondition implements Condition {
 
     if(parameters.containsKey("lista") && parameters.get("lista") != null && parameters.get("lista").get() != null) {
       convertedParameters.put("lista", parameters.get("lista").get());
-      if(convertedParameters.get("lista") !=null && !(convertedParameters.get("lista") instanceof ArrayList)) {
-        throw new BotCommandException(MESSAGES_GENERIC.getString("generic.UnexpectedTypeReceived","lista", "ArrayList", parameters.get("lista").get().getClass().getSimpleName()));
+      if(convertedParameters.get("lista") !=null && !(convertedParameters.get("lista") instanceof List)) {
+        throw new BotCommandException(MESSAGES_GENERIC.getString("generic.UnexpectedTypeReceived","lista", "List", parameters.get("lista").get().getClass().getSimpleName()));
       }
     }
     if(convertedParameters.get("lista") == null) {
@@ -80,7 +80,7 @@ public final class text_in_listCondition implements Condition {
     }
 
     try {
-      boolean result = command.validate((String)convertedParameters.get("value"),(String)convertedParameters.get("select"),(ArrayList<String>)convertedParameters.get("lista"));
+      boolean result = command.validate((String)convertedParameters.get("value"),(String)convertedParameters.get("select"),(List<String>)convertedParameters.get("lista"));
       return logger.traceExit(result);
     }
     catch (ClassCastException e) {

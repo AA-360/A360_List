@@ -8,6 +8,7 @@ import com.automationanywhere.commandsdk.model.AttributeType;
 import com.automationanywhere.commandsdk.model.DataType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.automationanywhere.commandsdk.annotations.BotCommand.CommandType.Condition;
 import static com.automationanywhere.commandsdk.model.AttributeType.BOOLEAN;
@@ -50,7 +51,7 @@ public class text_in_list {
             @Idx(index = "3", type = LIST)
             @Pkg(label = "List String", description = "Lista de string a ser consultada")
             @NotEmpty
-            ArrayList<String> lista
+            List<String> lista
     ) {
 
         for(String val : lista) {
