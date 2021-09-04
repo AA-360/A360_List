@@ -1,3 +1,5 @@
+import com.automationanywhere.botcommand.data.Value;
+import com.automationanywhere.botcommand.data.impl.StringValue;
 import com.automationanywhere.botcommand.samples.commands.conditionals.text_in_list;
 import org.testng.annotations.Test;
 
@@ -9,8 +11,8 @@ public class text_in_list_test {
     void teste(){
     text_in_list act = new text_in_list();
 
-    List<String> lista = new ArrayList<String>();
-    lista.add("test");
+    List<Value> lista = new ArrayList<Value>();
+    lista.add(new StringValue("test"));
 
     Boolean a = act.validate("test","equals",lista);
     System.out.println("================== Value:" + a);

@@ -80,7 +80,7 @@ public final class text_in_listCondition implements Condition {
     }
 
     try {
-      boolean result = command.validate((String)convertedParameters.get("value"),(String)convertedParameters.get("select"),(List<String>)convertedParameters.get("lista"));
+      boolean result = command.validate((String)convertedParameters.get("value"),(String)convertedParameters.get("select"),(List<Value>)convertedParameters.get("lista"));
       return logger.traceExit(result);
     }
     catch (ClassCastException e) {

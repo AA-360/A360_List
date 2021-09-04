@@ -1,5 +1,6 @@
 package com.automationanywhere.botcommand.samples.commands.conditionals;
 
+import com.automationanywhere.botcommand.data.Value;
 import com.automationanywhere.botcommand.exception.BotCommandException;
 import com.automationanywhere.commandsdk.annotations.*;
 import com.automationanywhere.commandsdk.annotations.rules.NotEmpty;
@@ -51,10 +52,10 @@ public class text_in_list {
             @Idx(index = "3", type = LIST)
             @Pkg(label = "List String", description = "Lista de string a ser consultada")
             @NotEmpty
-            List<String> lista
+            List<Value> lista
     ) {
 
-        for(String val : lista) {
+        for(Value val : lista) {
             if(select.equals("equals")){
                 if(val.equals(value))
                     return true;
@@ -62,10 +63,10 @@ public class text_in_list {
                 if(!val.equals(value))
                     return true;
             }else if(select.equals("in")){
-                if (val.contains(value))
+                if (val.toString().contains(value))
                     return true;
             }else {
-                if (!val.contains(value))
+                if (!val.toString().contains(value))
                     return true;
             }
         }
