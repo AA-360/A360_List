@@ -2,6 +2,7 @@ import com.automationanywhere.botcommand.data.Value;
 import com.automationanywhere.botcommand.data.impl.ListValue;
 import com.automationanywhere.botcommand.data.impl.StringValue;
 import com.automationanywhere.botcommand.exception.BotCommandException;
+import com.automationanywhere.botcommand.samples.commands.basic.AddValue;
 import com.automationanywhere.botcommand.samples.commands.basic.Filter;
 import org.testng.annotations.Test;
 
@@ -16,13 +17,36 @@ import java.util.List;
 public class FilterTest {
 
     @Test
+    public void test2(){
+        AddValue a = new AddValue();
+
+        ListValue<String> returnvalue = new ListValue<String>();
+        List<Value> vals = new ArrayList<Value>();
+
+        vals.add(new StringValue("OK"));
+        vals.add(new StringValue("ABC"));
+        vals.add(new StringValue("DEF"));
+        vals.add(new StringValue("DEF"));
+
+
+        String code = this.code();
+
+        ListValue<String> ret = a.action(vals,"11");
+        System.out.println(vals);
+        System.out.println(ret.get());
+
+
+
+
+    }
+
     public void test(){
         Filter a = new Filter();
 
         ListValue<String> returnvalue = new ListValue<String>();
         List<Value> vals = new ArrayList<Value>();
 
-        vals.add(new StringValue("ABC"));
+        vals.add(new StringValue("OK"));
         vals.add(new StringValue("ABC"));
         vals.add(new StringValue("DEF"));
         vals.add(new StringValue("DEF"));

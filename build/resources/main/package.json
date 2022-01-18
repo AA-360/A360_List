@@ -4,10 +4,45 @@
     "description": "",
     "group": "com.automationanywhere",
     "artifactName": "List_Uts",
-    "packageVersion": "1.4-20210904-093633",
-    "codeVersion": "1.4-20210904-093633",
+    "packageVersion": "1.4-20220118-140749",
+    "codeVersion": "1.4-20220118-140749",
     "author": "",
     "commands": [
+        {
+            "name": "AddValue",
+            "label": "AddValue",
+            "description": "Esta action adciona um valor a uma lista",
+            "nodeLabel": "Adciona valor a lista {{lista}}",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.AddValueCommand",
+            "icon": "pkg.svg",
+            "returnType": "LIST",
+            "returnSubtype": "STRING",
+            "returnLabel": "",
+            "returnRequired": true,
+            "attributes": [
+                {
+                    "name": "lista",
+                    "label": "List String",
+                    "description": "Lista de string a ser unificada!",
+                    "type": "LIST",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                },
+                {
+                    "name": "Value",
+                    "label": "Novo Valor:",
+                    "type": "TEXT",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                }
+            ]
+        },
         {
             "name": "Filter",
             "label": "Filter",
