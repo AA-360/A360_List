@@ -17,6 +17,7 @@ import com.automationanywhere.botcommand.data.impl.ListValue;
 import com.automationanywhere.botcommand.data.impl.StringValue;
 import com.automationanywhere.commandsdk.annotations.*;
 import com.automationanywhere.commandsdk.annotations.rules.NotEmpty;
+import com.automationanywhere.commandsdk.model.AttributeType;
 import com.automationanywhere.commandsdk.model.DataType;
 import com.sun.xml.bind.v2.schemagen.xmlschema.Any;
 
@@ -51,10 +52,10 @@ public class AddValue {
             @Pkg(label = "List String", description = "Lista de string a ser unificada!")
             @NotEmpty
             List<Value> lista,
-            @Idx(index = "2", type = TEXT)
+            @Idx(index = "2", type = UNKNOWN)
             @Pkg(label = "Novo Valor:")
             @NotEmpty
-            String Value
+             Value
     ) {
         String value2 = String.copyValueOf(Value.toCharArray());
         ListValue<String> OutPut = new ListValue<String>();
