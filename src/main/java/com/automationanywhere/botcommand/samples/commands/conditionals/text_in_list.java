@@ -28,8 +28,8 @@ import static com.automationanywhere.commandsdk.model.DataType.STRING;
  */
 @BotCommand(commandType = Condition)
 @CommandPkg(label = "TextInList", name = "TextInList",
-        description = "Verifica se um texto existe ou nao dentro de uma lista",
-        node_label = "TextInList: Check for {{value}} in {{lista}} - Condition ->{{select}}"
+        description = "Verifica se um texto existe dentro de uma lista",
+        node_label = "Check for {{value}} in {{lista}} - Condition ->{{select}}"
 )
 public class text_in_list {
 
@@ -57,10 +57,10 @@ public class text_in_list {
 
         for(Value val : lista) {
             if(select.equals("equals")){
-                if(val.equals(value))
+                if(val.toString().equals(value))
                     return true;
             }else if(select.equals("different")){
-                if(!val.equals(value))
+                if(!val.toString().equals(value))
                     return true;
             }else if(select.equals("in")){
                 if (val.toString().contains(value))

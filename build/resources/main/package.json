@@ -4,45 +4,10 @@
     "description": "",
     "group": "com.automationanywhere",
     "artifactName": "List_Uts",
-    "packageVersion": "1.4-20220118-140749",
-    "codeVersion": "1.4-20220118-140749",
+    "packageVersion": "1.5-20220712-171145",
+    "codeVersion": "1.5-20220712-171145",
     "author": "",
     "commands": [
-        {
-            "name": "AddValue",
-            "label": "AddValue",
-            "description": "Esta action adciona um valor a uma lista",
-            "nodeLabel": "Adciona valor a lista {{lista}}",
-            "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.AddValueCommand",
-            "icon": "pkg.svg",
-            "returnType": "LIST",
-            "returnSubtype": "STRING",
-            "returnLabel": "",
-            "returnRequired": true,
-            "attributes": [
-                {
-                    "name": "lista",
-                    "label": "List String",
-                    "description": "Lista de string a ser unificada!",
-                    "type": "LIST",
-                    "rules": [
-                        {
-                            "name": "NOT_EMPTY"
-                        }
-                    ]
-                },
-                {
-                    "name": "Value",
-                    "label": "Novo Valor:",
-                    "type": "TEXT",
-                    "rules": [
-                        {
-                            "name": "NOT_EMPTY"
-                        }
-                    ]
-                }
-            ]
-        },
         {
             "name": "Filter",
             "label": "Filter",
@@ -237,9 +202,76 @@
         {
             "name": "TextInList",
             "label": "TextInList",
-            "description": "Verifica se um texto existe ou nao dentro de uma lista",
-            "nodeLabel": "TextInList: Check for {{value}} in {{lista}} - Condition ->{{select}}",
+            "description": "Verifica se um texto existe dentro de uma lista",
+            "nodeLabel": "Check for {{value}} in {{lista}} - Condition ->{{select}}",
             "mainClass": "com.automationanywhere.botcommand.samples.commands.conditionals.text_in_listCondition",
+            "attributes": [
+                {
+                    "name": "value",
+                    "label": "Valor",
+                    "type": "TEXT",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        },
+                        {
+                            "name": "VARIABLE_TYPE",
+                            "value": "STRING"
+                        }
+                    ]
+                },
+                {
+                    "name": "select",
+                    "label": "Operador",
+                    "description": "Procura um  valor dentro da lista com a condi\u00e7\u00e3o correspondente",
+                    "type": "SELECT",
+                    "defaultValue": {
+                        "string": "equals",
+                        "type": "STRING"
+                    },
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ],
+                    "options": [
+                        {
+                            "label": "Igual (=)",
+                            "value": "equals"
+                        },
+                        {
+                            "label": "Diferente (\u2260)",
+                            "value": "different"
+                        },
+                        {
+                            "label": "Inclui",
+                            "value": "in"
+                        },
+                        {
+                            "label": "N\u00e3o Inclui",
+                            "value": "not in"
+                        }
+                    ]
+                },
+                {
+                    "name": "lista",
+                    "label": "List String",
+                    "description": "Lista de string a ser consultada",
+                    "type": "LIST",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "TextNotInList",
+            "label": "TextNotInList",
+            "description": "Verifica se um texto n\u00e3o existe dentro de uma lista",
+            "nodeLabel": "Check for {{value}} not in {{lista}} - Condition ->{{select}}",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.conditionals.text_not_in_listCondition",
             "attributes": [
                 {
                     "name": "value",

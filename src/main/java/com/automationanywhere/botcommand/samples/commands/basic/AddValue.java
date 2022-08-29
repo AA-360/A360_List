@@ -30,7 +30,7 @@ import static com.automationanywhere.commandsdk.model.AttributeType.*;
 //import java.Math;
 //import Math;
 
-@BotCommand
+//@BotCommand
 @CommandPkg(
         label = "AddValue",
         description = "Esta action adciona um valor a uma lista",
@@ -52,20 +52,20 @@ public class AddValue {
             @Pkg(label = "List String", description = "Lista de string a ser unificada!")
             @NotEmpty
             List<Value> lista,
-            @Idx(index = "2", type = UNKNOWN)
+            @Idx(index = "2", type = VARIABLE)
             @Pkg(label = "Novo Valor:")
             @NotEmpty
-             Value
+             Value v
     ) {
-        String value2 = String.copyValueOf(Value.toCharArray());
+//        String value2 = String.copyValueOf(Value.toCharArray());
         ListValue<String> OutPut = new ListValue<String>();
-        List<Value> CTRL = new ArrayList<Value>();
-
-        for(Value item: lista){
-            CTRL.add(item);
-        }
-        CTRL.add(new StringValue(value2));
-        OutPut.set(CTRL);
+//        List<Value> CTRL = new ArrayList<Value>();
+//
+//        for(Value item: lista){
+//            CTRL.add(item);
+//        }
+//        CTRL.add(new StringValue(value2));
+//        OutPut.set(CTRL);
         return OutPut;
     }
 

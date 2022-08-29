@@ -31,9 +31,9 @@ public class FilterTest {
 
         String code = this.code();
 
-        ListValue<String> ret = a.action(vals,"11");
-        System.out.println(vals);
-        System.out.println(ret.get());
+        //ListValue<String> ret = a.action(vals,"11");
+        //System.out.println(vals);
+        //System.out.println(ret.get());
 
 
 
