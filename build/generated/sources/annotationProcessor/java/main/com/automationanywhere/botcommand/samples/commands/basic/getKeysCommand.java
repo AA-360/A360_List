@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public final class StringSplitCommand implements BotCommand {
-  private static final Logger logger = LogManager.getLogger(StringSplitCommand.class);
+public final class getKeysCommand implements BotCommand {
+  private static final Logger logger = LogManager.getLogger(getKeysCommand.class);
 
   private static final Messages MESSAGES_GENERIC = MessagesFactory.getMessages("com.automationanywhere.commandsdk.generic.messages");
 
@@ -32,30 +32,20 @@ public final class StringSplitCommand implements BotCommand {
   public Optional<Value> execute(GlobalSessionContext globalSessionContext,
       Map<String, Value> parameters, Map<String, Object> sessionMap) {
     logger.traceEntry(() -> parameters != null ? parameters.entrySet().stream().filter(en -> !Arrays.asList( new String[] {}).contains(en.getKey()) && en.getValue() != null).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)).toString() : null, ()-> sessionMap != null ?sessionMap.toString() : null);
-    StringSplit command = new StringSplit();
+    getKeys command = new getKeys();
     HashMap<String, Object> convertedParameters = new HashMap<String, Object>();
-    if(parameters.containsKey("text") && parameters.get("text") != null && parameters.get("text").get() != null) {
-      convertedParameters.put("text", parameters.get("text").get());
-      if(convertedParameters.get("text") !=null && !(convertedParameters.get("text") instanceof String)) {
-        throw new BotCommandException(MESSAGES_GENERIC.getString("generic.UnexpectedTypeReceived","text", "String", parameters.get("text").get().getClass().getSimpleName()));
+    if(parameters.containsKey("dict") && parameters.get("dict") != null && parameters.get("dict").get() != null) {
+      convertedParameters.put("dict", parameters.get("dict").get());
+      if(convertedParameters.get("dict") !=null && !(convertedParameters.get("dict") instanceof Map)) {
+        throw new BotCommandException(MESSAGES_GENERIC.getString("generic.UnexpectedTypeReceived","dict", "Map", parameters.get("dict").get().getClass().getSimpleName()));
       }
     }
-    if(convertedParameters.get("text") == null) {
-      throw new BotCommandException(MESSAGES_GENERIC.getString("generic.validation.notEmpty","text"));
-    }
-
-    if(parameters.containsKey("delimitador") && parameters.get("delimitador") != null && parameters.get("delimitador").get() != null) {
-      convertedParameters.put("delimitador", parameters.get("delimitador").get());
-      if(convertedParameters.get("delimitador") !=null && !(convertedParameters.get("delimitador") instanceof String)) {
-        throw new BotCommandException(MESSAGES_GENERIC.getString("generic.UnexpectedTypeReceived","delimitador", "String", parameters.get("delimitador").get().getClass().getSimpleName()));
-      }
-    }
-    if(convertedParameters.get("delimitador") == null) {
-      throw new BotCommandException(MESSAGES_GENERIC.getString("generic.validation.notEmpty","delimitador"));
+    if(convertedParameters.get("dict") == null) {
+      throw new BotCommandException(MESSAGES_GENERIC.getString("generic.validation.notEmpty","dict"));
     }
 
     try {
-      Optional<Value> result =  Optional.ofNullable(command.action((String)convertedParameters.get("text"),(String)convertedParameters.get("delimitador")));
+      Optional<Value> result =  Optional.ofNullable(command.action((Map<String, Value>)convertedParameters.get("dict")));
       return logger.traceExit(result);
     }
     catch (ClassCastException e) {

@@ -15,27 +15,31 @@ package com.automationanywhere.botcommand.samples.commands.basic;
 import com.automationanywhere.botcommand.data.Value;
 import com.automationanywhere.botcommand.data.impl.ListValue;
 import com.automationanywhere.botcommand.data.impl.StringValue;
+import com.automationanywhere.botcommand.samples.commands.utils.DictUteis;
 import com.automationanywhere.commandsdk.annotations.*;
 import com.automationanywhere.commandsdk.annotations.rules.NotEmpty;
+import com.automationanywhere.commandsdk.annotations.rules.VariableType;
+import com.automationanywhere.commandsdk.model.AttributeType;
 import com.automationanywhere.commandsdk.model.DataType;
 
-import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static com.automationanywhere.commandsdk.model.AttributeType.*;
+import static com.automationanywhere.commandsdk.model.DataType.DICTIONARY;
 //import MaskFormatter;
 
 //import java.Math;
 //import Math;
 
-@BotCommand
+//@BotCommand
 @CommandPkg(
-        label = "UniqueValues",
-        description = "Esta action retira os valores duplicados",
-        node_label = "UniqueValues: Remove duplicatas da lista {{lista}}",
+        label = "getKeys",
+        description = "get keys from dict",
+        node_label = "get keys from {{dict}}",
         icon = "pkg.svg",
-        name = "UniqueValues",
+        name = "getKeys",
         return_description = "",
         return_type = DataType.LIST,
         return_sub_type = DataType.STRING,
@@ -43,31 +47,42 @@ import static com.automationanywhere.commandsdk.model.AttributeType.*;
 )
 
 
-public class UniqueValues {
+public class getKeys {
 
     @Execute
     public ListValue<String> action(
-            @Idx(index = "1", type = LIST)
-            @Pkg(label = "List String", description = "Lista de string a ser unificada!")
+            @Idx(index = "1", type = AttributeType.DICTIONARY)
+            @VariableType(DICTIONARY)
+            @Pkg(label = "Dict:")
             @NotEmpty
+<<<<<<< HEAD:src/main/java/com/automationanywhere/botcommand/samples/commands/basic/AddValue.java
             List<Value> lista,
-            @Idx(index = "2", type = BOOLEAN)
-            @Pkg(label = "remove empty values",default_value_type = DataType.BOOLEAN,default_value = "false")
+            @Idx(index = "2", type = VARIABLE)
+            @Pkg(label = "Novo Valor:")
             @NotEmpty
-            Boolean removeEmpty
+             Value v
     ) {
+//        String value2 = String.copyValueOf(Value.toCharArray());
+        ListValue<String> OutPut = new ListValue<String>();
+//        List<Value> CTRL = new ArrayList<Value>();
+//
+//        for(Value item: lista){
+//            CTRL.add(item);
+//        }
+//        CTRL.add(new StringValue(value2));
+//        OutPut.set(CTRL);
+=======
+                    Map<String, Value> dict
+            ) {
+
         ListValue<String> OutPut = new ListValue<String>();
         List<Value> CTRL = new ArrayList<Value>();
 
-        for(Value item: lista){
-            String val = item.toString().trim();
-            if((!(val.isBlank() || val.isEmpty()) && removeEmpty) || !removeEmpty){
-                if(this.ocurrenceInList(val,CTRL) == 0){
-                    CTRL.add(item);
-                }
-            }
+        for(String item: DictUteis.getKeys(dict)){
+            CTRL.add(new StringValue(item));
         }
         OutPut.set(CTRL);
+>>>>>>> 69636e633f9b8b4e4ea8f298ac8ad76677bf5452:src/main/java/com/automationanywhere/botcommand/samples/commands/basic/getKeys.java
         return OutPut;
     }
 
