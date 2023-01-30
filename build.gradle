@@ -107,11 +107,10 @@ configure(allprojects){
 		// https://mvnrepository.com/artifact/net.java.dev.jna/jna
 		implementation group: 'net.java.dev.jna', name: 'jna', version: '5.8.0'
 		implementation 'net.java.dev.jna:jna-platform:5.5.0'
-		implementation 'org.json:json:20171018'
 
-//		compile group: 'org.apache.activemq', name: 'activemq-all', version: '5.15.0'
-//		compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.7.0'
-//		compile group: 'com.h2database', name: 'h2', version: '1.4.200'
+		compile group: 'org.apache.activemq', name: 'activemq-all', version: '5.15.0'
+		compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.7.0'
+		compile group: 'com.h2database', name: 'h2', version: '1.4.200'
 
 		//Add below dependencies to compile the samples
 

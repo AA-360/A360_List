@@ -12,13 +12,14 @@ import java.lang.String;
 import java.lang.Throwable;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public final class KeysExistsCondition implements Condition {
-  private static final Logger logger = LogManager.getLogger(KeysExistsCondition.class);
+public final class text_in_listCondition implements Condition {
+  private static final Logger logger = LogManager.getLogger(text_in_listCondition.class);
 
   private static final Messages MESSAGES_GENERIC = MessagesFactory.getMessages("com.automationanywhere.commandsdk.generic.messages");
 
@@ -29,26 +30,16 @@ public final class KeysExistsCondition implements Condition {
   public boolean test(GlobalSessionContext globalSessionContext, Map<String, Value> parameters,
       Map<String, Object> sessionMap) {
     logger.traceEntry(() -> parameters != null ? parameters.entrySet().stream().filter(en -> !Arrays.asList( new String[] {}).contains(en.getKey()) && en.getValue() != null).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)).toString() : null, ()-> sessionMap != null ?sessionMap.toString() : null);
-    KeysExists command = new KeysExists();
+    text_in_list command = new text_in_list();
     HashMap<String, Object> convertedParameters = new HashMap<String, Object>();
-    if(parameters.containsKey("dict") && parameters.get("dict") != null && parameters.get("dict").get() != null) {
-      convertedParameters.put("dict", parameters.get("dict").get());
-      if(convertedParameters.get("dict") !=null && !(convertedParameters.get("dict") instanceof Map)) {
-        throw new BotCommandException(MESSAGES_GENERIC.getString("generic.UnexpectedTypeReceived","dict", "Map", parameters.get("dict").get().getClass().getSimpleName()));
+    if(parameters.containsKey("value") && parameters.get("value") != null && parameters.get("value").get() != null) {
+      convertedParameters.put("value", parameters.get("value").get());
+      if(convertedParameters.get("value") !=null && !(convertedParameters.get("value") instanceof String)) {
+        throw new BotCommandException(MESSAGES_GENERIC.getString("generic.UnexpectedTypeReceived","value", "String", parameters.get("value").get().getClass().getSimpleName()));
       }
     }
-    if(convertedParameters.get("dict") == null) {
-      throw new BotCommandException(MESSAGES_GENERIC.getString("generic.validation.notEmpty","dict"));
-    }
-
-    if(parameters.containsKey("keys") && parameters.get("keys") != null && parameters.get("keys").get() != null) {
-      convertedParameters.put("keys", parameters.get("keys").get());
-      if(convertedParameters.get("keys") !=null && !(convertedParameters.get("keys") instanceof String)) {
-        throw new BotCommandException(MESSAGES_GENERIC.getString("generic.UnexpectedTypeReceived","keys", "String", parameters.get("keys").get().getClass().getSimpleName()));
-      }
-    }
-    if(convertedParameters.get("keys") == null) {
-      throw new BotCommandException(MESSAGES_GENERIC.getString("generic.validation.notEmpty","keys"));
+    if(convertedParameters.get("value") == null) {
+      throw new BotCommandException(MESSAGES_GENERIC.getString("generic.validation.notEmpty","value"));
     }
 
     if(parameters.containsKey("select") && parameters.get("select") != null && parameters.get("select").get() != null) {
@@ -62,18 +53,34 @@ public final class KeysExistsCondition implements Condition {
     }
     if(convertedParameters.get("select") != null) {
       switch((String)convertedParameters.get("select")) {
-        case "exists" : {
+        case "equals" : {
 
         } break;
-        case "not exists" : {
+        case "different" : {
+
+        } break;
+        case "in" : {
+
+        } break;
+        case "not in" : {
 
         } break;
         default : throw new BotCommandException(MESSAGES_GENERIC.getString("generic.InvalidOption","select"));
       }
     }
 
+    if(parameters.containsKey("lista") && parameters.get("lista") != null && parameters.get("lista").get() != null) {
+      convertedParameters.put("lista", parameters.get("lista").get());
+      if(convertedParameters.get("lista") !=null && !(convertedParameters.get("lista") instanceof List)) {
+        throw new BotCommandException(MESSAGES_GENERIC.getString("generic.UnexpectedTypeReceived","lista", "List", parameters.get("lista").get().getClass().getSimpleName()));
+      }
+    }
+    if(convertedParameters.get("lista") == null) {
+      throw new BotCommandException(MESSAGES_GENERIC.getString("generic.validation.notEmpty","lista"));
+    }
+
     try {
-      boolean result = command.validate((Map<String, Value>)convertedParameters.get("dict"),(String)convertedParameters.get("keys"),(String)convertedParameters.get("select"));
+      boolean result = command.validate((String)convertedParameters.get("value"),(String)convertedParameters.get("select"),(List<Value>)convertedParameters.get("lista"));
       return logger.traceExit(result);
     }
     catch (ClassCastException e) {

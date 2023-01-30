@@ -1,9 +1,8 @@
 {
-    "name": "Dict_Uts",
-    "label": "Dict_Uts",
+    "name": "List_Uts",
+    "label": "List_Uts",
     "description": "",
     "group": "com.automationanywhere",
-<<<<<<< HEAD
     "artifactName": "List_Uts",
     "packageVersion": "1.5-20220712-171145",
     "codeVersion": "1.5-20220712-171145",
@@ -14,18 +13,6 @@
             "label": "Filter",
             "description": "Filtro de registros na Lista com formula em JS",
             "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.FilterCommand",
-=======
-    "artifactName": "Dict_Uts",
-    "packageVersion": "1.4-20220708-125840",
-    "codeVersion": "1.4-20220708-125840",
-    "author": "",
-    "commands": [
-        {
-            "name": "getKeys",
-            "label": "getKeys",
-            "description": "get keys from dict",
-            "nodeLabel": "get keys from {{dict}}",
-            "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.getKeysCommand",
             "icon": "pkg.svg",
             "returnType": "LIST",
             "returnSubtype": "STRING",
@@ -33,52 +20,135 @@
             "returnRequired": true,
             "attributes": [
                 {
-                    "name": "dict",
-                    "label": "Dict:",
-                    "type": "DICTIONARY",
+                    "name": "lista",
+                    "label": "Lista:",
+                    "type": "LIST",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                },
+                {
+                    "name": "parametro",
+                    "label": "Parametro",
+                    "description": "Parametro extra de entrada",
+                    "type": "TEXT"
+                },
+                {
+                    "name": "code",
+                    "label": "javaScript Code",
+                    "description": "sua fun\u00e7\u00e3o deve se chamar 'filter' obrigatoriamente e retornar true|false \n VALUE -> cada valor\nINPUT -> Parametro",
+                    "type": "CODE",
                     "rules": [
                         {
                             "name": "NOT_EMPTY"
                         },
                         {
-                            "name": "VARIABLE_TYPE",
-                            "value": "DICTIONARY"
+                            "name": "CODE_TYPE",
+                            "value": "text/javascript"
                         }
                     ]
                 }
             ]
         },
         {
-            "name": "getValue",
-            "label": "getValue",
-            "description": "get value from dict",
-            "nodeLabel": "get value from {{dict}}",
-            "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.getValueCommand",
->>>>>>> 69636e633f9b8b4e4ea8f298ac8ad76677bf5452
+            "name": "JoinList",
+            "label": "JoinList",
+            "description": "Esta action Unifica os itens de uma lista separados por um delimitador",
+            "nodeLabel": "Join {{lista}} by '{{delimiter}}' delimiter",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.JoinListCommand",
             "icon": "pkg.svg",
-            "returnType": "ANY",
-            "returnSubtype": "ANY",
+            "returnType": "STRING",
+            "returnSubtype": "STRING",
             "returnLabel": "",
             "returnRequired": true,
             "attributes": [
                 {
-                    "name": "dict",
-                    "label": "Dict:",
-                    "type": "DICTIONARY",
+                    "name": "delimiter",
+                    "label": "Delimitador",
+                    "type": "TEXT",
                     "rules": [
                         {
                             "name": "NOT_EMPTY"
-                        },
-                        {
-                            "name": "VARIABLE_TYPE",
-                            "value": "DICTIONARY"
                         }
                     ]
                 },
                 {
-                    "name": "keys",
-                    "label": "Keys:",
-                    "description": "Keys Ex: key1.key2",
+                    "name": "lista",
+                    "label": "List String",
+                    "description": "Lista de string a ser unificada!",
+                    "type": "LIST",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "MergeLists",
+            "label": "MergeLists",
+            "description": "Esta action unifica os itens de 2 listas",
+            "nodeLabel": "Merge lists {{lista1}} and {{lista2}} into one list",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.MergeListsCommand",
+            "icon": "pkg.svg",
+            "returnType": "LIST",
+            "returnSubtype": "STRING",
+            "returnLabel": "",
+            "returnRequired": true,
+            "attributes": [
+                {
+                    "name": "lista1",
+                    "label": "List String",
+                    "description": "Lista de string a ser unificada!",
+                    "type": "LIST",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                },
+                {
+                    "name": "lista2",
+                    "label": "List String",
+                    "description": "Lista de string a ser unificada!",
+                    "type": "LIST",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "StringSplit",
+            "label": "StringSplit",
+            "description": "Esta action quebra um texto em uma lista de texto por um delimitador",
+            "nodeLabel": "Split {{text}} por {{delimitador}} e atribui a {{returnTo}}",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.StringSplitCommand",
+            "icon": "pkg.svg",
+            "returnType": "LIST",
+            "returnSubtype": "STRING",
+            "returnLabel": "",
+            "returnRequired": true,
+            "attributes": [
+                {
+                    "name": "text",
+                    "label": "Texto a ser quebrado",
+                    "description": "a;b;c;d\na,b,c,d",
+                    "type": "TEXTAREA",
+                    "rules": [
+                        {
+                            "name": "NOT_EMPTY"
+                        }
+                    ]
+                },
+                {
+                    "name": "delimitador",
+                    "label": "Delimitador",
                     "type": "TEXT",
                     "rules": [
                         {
@@ -89,33 +159,36 @@
             ]
         },
         {
-            "name": "xmlToDict",
-            "label": "xmlToDict",
-            "description": "xml file to dict",
-            "nodeLabel": "xml {{file}} to {{returnTo}}",
-            "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.xmlToDictCommand",
+            "name": "UniqueValues",
+            "label": "UniqueValues",
+            "description": "Esta action retira os valores duplicados",
+            "nodeLabel": "UniqueValues: Remove duplicatas da lista {{lista}}",
+            "mainClass": "com.automationanywhere.botcommand.samples.commands.basic.UniqueValuesCommand",
             "icon": "pkg.svg",
-            "returnType": "DICTIONARY",
-            "returnSubtype": "UNDEFINED",
+            "returnType": "LIST",
+            "returnSubtype": "STRING",
             "returnLabel": "",
             "returnRequired": true,
             "attributes": [
                 {
-                    "name": "file",
-                    "label": "xml:",
-                    "type": "FILE",
+                    "name": "lista",
+                    "label": "List String",
+                    "description": "Lista de string a ser unificada!",
+                    "type": "LIST",
                     "rules": [
                         {
-                            "name": "FILE_EXTENSION",
-                            "value": ".xml"
+                            "name": "NOT_EMPTY"
                         }
                     ]
                 },
                 {
-                    "name": "forceString",
-                    "label": "ForceString:",
-                    "description": "force number values as string",
-                    "type": "CHECKBOX",
+                    "name": "removeEmpty",
+                    "label": "remove empty values",
+                    "type": "BOOLEAN",
+                    "defaultValue": {
+                        "boolean": false,
+                        "type": "BOOLEAN"
+                    },
                     "rules": [
                         {
                             "name": "NOT_EMPTY"
@@ -127,98 +200,33 @@
     ],
     "conditionals": [
         {
-            "name": "KeysExists",
-            "label": "KeysExists",
-            "description": "Verifica se um texto existe ou nao dentro de uma lista",
-            "nodeLabel": "KeysExists: Check for {{keys}} in {{dict}} {{select}}",
-            "mainClass": "com.automationanywhere.botcommand.samples.commands.conditionals.KeysExistsCondition",
-            "attributes": [
-                {
-                    "name": "dict",
-                    "label": "Dict:",
-                    "type": "DICTIONARY",
-                    "rules": [
-                        {
-                            "name": "NOT_EMPTY"
-                        },
-                        {
-                            "name": "VARIABLE_TYPE",
-                            "value": "DICTIONARY"
-                        }
-                    ]
-                },
-                {
-                    "name": "keys",
-                    "label": "Keys:",
-                    "description": "Keys Ex: key1.key2",
-                    "type": "TEXT",
-                    "rules": [
-                        {
-                            "name": "NOT_EMPTY"
-                        }
-                    ]
-                },
-                {
-                    "name": "select",
-                    "label": "Operator:",
-                    "type": "SELECT",
-                    "defaultValue": {
-                        "string": "exists",
-                        "type": "STRING"
-                    },
-                    "rules": [
-                        {
-                            "name": "NOT_EMPTY"
-                        }
-                    ],
-                    "options": [
-                        {
-                            "label": "Exists",
-                            "value": "exists"
-                        },
-                        {
-                            "label": "Not Exists",
-                            "value": "not exists"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-<<<<<<< HEAD
             "name": "TextInList",
             "label": "TextInList",
             "description": "Verifica se um texto existe dentro de uma lista",
             "nodeLabel": "Check for {{value}} in {{lista}} - Condition ->{{select}}",
             "mainClass": "com.automationanywhere.botcommand.samples.commands.conditionals.text_in_listCondition",
-=======
-            "name": "typeValidation",
-            "label": "typeValidation",
-            "description": "Validates an any var type to according type",
-            "nodeLabel": "Check for {{v}} {{match}} {{type}}",
-            "mainClass": "com.automationanywhere.botcommand.samples.commands.conditionals.typeValidationCondition",
->>>>>>> 69636e633f9b8b4e4ea8f298ac8ad76677bf5452
             "attributes": [
                 {
-                    "name": "v",
-                    "label": "Var:",
-                    "type": "VARIABLE",
+                    "name": "value",
+                    "label": "Valor",
+                    "type": "TEXT",
                     "rules": [
                         {
                             "name": "NOT_EMPTY"
                         },
                         {
                             "name": "VARIABLE_TYPE",
-                            "value": "ANY"
+                            "value": "STRING"
                         }
                     ]
                 },
                 {
-                    "name": "type",
-                    "label": "Type:",
+                    "name": "select",
+                    "label": "Operador",
+                    "description": "Procura um  valor dentro da lista com a condi\u00e7\u00e3o correspondente",
                     "type": "SELECT",
                     "defaultValue": {
-                        "string": "string",
+                        "string": "equals",
                         "type": "STRING"
                     },
                     "rules": [
@@ -228,44 +236,31 @@
                     ],
                     "options": [
                         {
-                            "label": "String",
-                            "value": "string"
+                            "label": "Igual (=)",
+                            "value": "equals"
                         },
                         {
-                            "label": "Number",
-                            "value": "number"
+                            "label": "Diferente (\u2260)",
+                            "value": "different"
                         },
                         {
-                            "label": "Dictionary",
-                            "value": "dictionary"
+                            "label": "Inclui",
+                            "value": "in"
                         },
                         {
-                            "label": "List",
-                            "value": "list"
+                            "label": "N\u00e3o Inclui",
+                            "value": "not in"
                         }
                     ]
                 },
                 {
-                    "name": "match",
-                    "label": "Operator:",
-                    "type": "SELECT",
-                    "defaultValue": {
-                        "string": "match",
-                        "type": "STRING"
-                    },
+                    "name": "lista",
+                    "label": "List String",
+                    "description": "Lista de string a ser consultada",
+                    "type": "LIST",
                     "rules": [
                         {
                             "name": "NOT_EMPTY"
-                        }
-                    ],
-                    "options": [
-                        {
-                            "label": "Match",
-                            "value": "match"
-                        },
-                        {
-                            "label": "Not Exists",
-                            "value": "not match"
                         }
                     ]
                 }
